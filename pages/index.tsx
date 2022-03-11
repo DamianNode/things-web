@@ -1,5 +1,6 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
+import MainView from '../components/MainView'
 import Sidebar from '../components/Sidebar'
 
 const Home: NextPage = () => {
@@ -11,8 +12,9 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main style={{ height: '100vh'}}>
+      <main style={{ display: 'grid', gridTemplateColumns: 'auto auto 1fr',height: '100vh'}}>
         <Sidebar />
+        <MainView />
       </main>
     </div>
   )

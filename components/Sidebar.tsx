@@ -1,4 +1,7 @@
+import { PlusIcon } from '@radix-ui/react-icons';
 import { styled } from '@stitches/react';
+import { useState } from 'react';
+import WidthIndicator from './WidthIndicator';
 
 const StyledSidebar = styled('div', {
   display: 'flex',
@@ -10,6 +13,7 @@ const StyledSidebar = styled('div', {
   backgroundColor: '#F5F6F8',
   color: '#31353A',
   padding: '32px',
+  borderRight: '2px solid #F0F1F3',
 });
 
 const StyledSiderbarFooter = styled('div', {
@@ -22,6 +26,20 @@ const StyledSiderbarFooter = styled('div', {
   padding: '0 32px',
 });
 
+const StyledFooterButton = styled('button', {
+  display: 'flex',
+  alignItems: 'center',
+  height: '40px',
+  padding: '4px 8px',
+  backgroundColor: 'inherit',
+  border: '1px solid transparent',
+  borderRadius: '4px',
+
+  '&:hover': {
+    borderColor: '#DDE0E6',
+  },
+})
+
 const StyledUl = styled('ul', {
   listStyle: 'none',
   padding: 0,
@@ -30,9 +48,9 @@ const StyledUl = styled('ul', {
   'li': {
     display: 'flex',
     justifyContent: 'space-between',
-    padding: '4px',
+    padding: '4px 8px',
 
-    '&:hover': {
+    '&.active': {
       borderRadius: '4px',
       backgroundColor: '#DDE0E6',
     },
@@ -44,25 +62,35 @@ const StyledUl = styled('ul', {
 });
 
 const Sidebar = () => { 
-    return (
-        <StyledSidebar>
-          <div>
-            <StyledUl>
-              <li>⭐️ Today<span>21</span></li>
-              <li>🗓 Upcoming</li>
-              <li>📌 Anytime</li>
-              <li>📦 Someday</li>
-            </StyledUl>
-            <StyledUl>
-              <li>📗 Logbook</li>
-              <li>🗑 Trash</li>
-            </StyledUl>
-          </div>
-          <StyledSiderbarFooter>
-            + New List
-          </StyledSiderbarFooter>
-        </StyledSidebar>
-    )
+  const [active, setActive] = useState('⭐️ Today');
+
+  const elements = ['⭐️ Today', '🗓 Upcoming', '📌 Anytime', '📦 Someday'];
+
+  return (
+    <>
+      <StyledSidebar>
+        <div>
+          <StyledUl>
+            {elements.map(element => 
+              <li key={element} className={element === active ? 'active': ''} onClick={() => setActive(element)}>
+                {element}
+              </li>
+            )}
+          </StyledUl>
+          <StyledUl>
+            <li>📗 Logbook</li>
+            <li>🗑 Trash</li>
+          </StyledUl>
+        </div>
+        <StyledSiderbarFooter>
+          <StyledFooterButton>
+            <PlusIcon width="20" height="20" />New List
+          </StyledFooterButton>
+        </StyledSiderbarFooter>
+      </StyledSidebar>
+      <WidthIndicator />
+    </>
+  )
 }
 
 export default Sidebar;
