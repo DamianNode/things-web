@@ -1,11 +1,14 @@
 import { MagnifyingGlassIcon, PlusIcon } from '@radix-ui/react-icons';
 import { styled } from '@stitches/react';
+import { useState } from 'react';
+import NewItemForm from './NewItemForm';
 
 
 const StyledMainView = styled('div', {
   display: 'flex',
   flexDirection: 'column',
   justifyContent: 'space-between',
+  alignItems: 'center',
   width: 'auto',
   height: '100%',
   padding: '32px',
@@ -38,11 +41,14 @@ const StyledMainViewFooterButton = styled('button', {
 })
 
 const MainView = () => {
+  const [showNewItemForm, setShowNewItemForm] = useState(false);
+
   return (
-    <StyledMainView>
+    <StyledMainView style={{ backgroundColor:  showNewItemForm ? '#F9F9FA' : 'white' }}>
+      <NewItemForm show={showNewItemForm} />
       MAIN
       <StyledMainViewFooter>
-        <StyledMainViewFooterButton>
+        <StyledMainViewFooterButton onClick={() => setShowNewItemForm(!showNewItemForm)}>
           <PlusIcon width="20" height="20" />
         </StyledMainViewFooterButton>
         <StyledMainViewFooterButton>
