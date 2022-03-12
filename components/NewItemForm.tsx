@@ -1,15 +1,16 @@
 import { styled } from "@stitches/react";
+import { motion } from "framer-motion";
 
-const StyledNewItemForm = styled('div', {
+const StyledNewItemForm = styled(motion.div, {
   width: '400px',
   height: '200px',
-  borderRadius: '20px',
+  borderRadius: '8px',
   backgroundColor: 'white',
 })
 
-const NewItemForm = ({show, children}: {show: boolean, children?: any}) => {
+const NewItemForm = ({children}: {children?: HTMLElement}) => {
   return (
-    <StyledNewItemForm style={{ display: show ? 'block' : 'none' }}>
+    <StyledNewItemForm>
       {children}
     </StyledNewItemForm>
   )

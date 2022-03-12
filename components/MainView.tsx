@@ -1,5 +1,6 @@
 import { MagnifyingGlassIcon, PlusIcon } from '@radix-ui/react-icons';
 import { styled } from '@stitches/react';
+import { motion } from 'framer-motion';
 import { useState } from 'react';
 import NewItemForm from './NewItemForm';
 
@@ -40,15 +41,26 @@ const StyledMainViewFooterButton = styled('button', {
   }
 })
 
+const variants = {
+  open: { opacity: 1, x: 0 },
+  closed: { opacity: 0, x: "-80%" },
+}
+
 const MainView = () => {
   const [showNewItemForm, setShowNewItemForm] = useState(false);
 
   return (
     <StyledMainView style={{ backgroundColor:  showNewItemForm ? '#F9F9FA' : 'white' }}>
-      <NewItemForm show={showNewItemForm} />
+      <motion.div
+        animate={showNewItemForm ? "open" : "closed"}
+        variants={variants}
+      >
+        <NewItemForm />
+      </motion.div>
+
       MAIN
       <StyledMainViewFooter>
-        <StyledMainViewFooterButton onClick={() => setShowNewItemForm(!showNewItemForm)}>
+        <StyledMainViewFooterButton onClick={() => setShowNewItemForm(showNewItemForm => !showNewItemForm)}>
           <PlusIcon width="20" height="20" />
         </StyledMainViewFooterButton>
         <StyledMainViewFooterButton>
