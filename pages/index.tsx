@@ -7,7 +7,7 @@ import WidthIndicator from '../components/WidthIndicator';
 
 const Home: NextPage = () => {
   const [sidebarWidth, setSidebarWidth] = useState('300px');
-  const refWidthResizer = useRef(null);
+  const refWidthResizer = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     const resizableElement = refWidthResizer.current;
@@ -29,16 +29,15 @@ const Home: NextPage = () => {
 
       const onMouseDown = (event: any) => {
         resizableElement.style.left = styles.left;
-        resizableElement.style.right = null;
+        resizableElement.style.right = styles.right;
         document.addEventListener("mousemove", onMouseMove)
         document.addEventListener("mouseup", onMouseUp)
       }
 
-      const rightResizer = refWidthResizer.current;
-      rightResizer.addEventListener("mousedown", onMouseDown);
+      resizableElement.addEventListener("mousedown", onMouseDown);
 
       return () => {
-        rightResizer.removeEventListener("mousedown", onMouseDown);
+        resizableElement.removeEventListener("mousedown", onMouseDown);
       };
     }
   }, [])
