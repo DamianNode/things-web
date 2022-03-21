@@ -1,14 +1,11 @@
+import { useState } from 'react';
 import { PlusIcon } from '@radix-ui/react-icons';
 import { styled } from '@stitches/react';
-import { useState } from 'react';
-import WidthIndicator from './WidthIndicator';
 
 const StyledSidebar = styled('div', {
   display: 'flex',
   flexDirection: 'column',
   justifyContent: 'space-between',
-  width: '20%',
-  minWidth: '300px',
   height: '100%',
   backgroundColor: '#F5F6F8',
   color: '#31353A',
@@ -88,7 +85,6 @@ const Sidebar = () => {
           </StyledFooterButton>
         </StyledSiderbarFooter>
       </StyledSidebar>
-      <WidthIndicator />
     </>
   )
 }
